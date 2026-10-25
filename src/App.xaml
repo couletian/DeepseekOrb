@@ -1,0 +1,16 @@
+<Application x:Class="DeepSeekOrb.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <!-- 这些画刷的值在 Theme.Apply() 中按系统深浅色覆盖 -->
+        <SolidColorBrush x:Key="TextPrimary"   Color="#F2F2F5"/>
+        <SolidColorBrush x:Key="TextSecondary"  Color="#C2C2C8"/>
+        <SolidColorBrush x:Key="BtnHover"       Color="#1FFFFFFF"/>
+        <SolidColorBrush x:Key="BtnHoverClose"  Color="#E81123"/>
+        <SolidColorBrush x:Key="BarTint"        Color="#99000000"/>
+        <SolidColorBrush x:Key="PageBg"         Color="#FF1B1D21"/>
+        <SolidColorBrush x:Key="Stroke"         Color="#1FFFFFFF"/>
+        <SolidColorBrush x:Key="Accent"         Color="#FF4D6BFE"/>
+    </Application.Resources>
+</Application>

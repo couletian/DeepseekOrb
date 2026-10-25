@@ -1,0 +1,72 @@
+<Window x:Class="DeepSeekOrb.OrbWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DeepSeek"
+        Width="56" Height="56"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Topmost="True"
+        WindowStartupLocation="Manual"
+        SnapsToDevicePixels="True"
+        UseLayoutRounding="True">
+
+    <Grid x:Name="Root" Background="Transparent">
+
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="打开 DeepSeek" Click="MenuOpen_Click"/>
+                <Separator/>
+                <MenuItem Header="退出" Click="MenuExit_Click"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
+
+        <Grid Width="52" Height="52"
+              HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RenderTransform>
+                <ScaleTransform x:Name="BallScale" CenterX="26" CenterY="26"/>
+            </Grid.RenderTransform>
+
+            <!-- 玻璃底：背后桌面的模糊截取 -->
+            <Border CornerRadius="15">
+                <Border.Clip>
+                    <RectangleGeometry Rect="0,0,52,52" RadiusX="15" RadiusY="15"/>
+                </Border.Clip>
+                <Image x:Name="Backdrop" Stretch="Fill"/>
+            </Border>
+
+            <!-- 雾面叠色（悬停时加深） -->
+            <Border x:Name="Tint" CornerRadius="15" Background="#14FFFFFF"/>
+
+            <!-- 玻璃边缘 -->
+            <Border CornerRadius="15" IsHitTestVisible="False"
+                    BorderThickness="1" BorderBrush="#40FFFFFF"/>
+
+            <!-- 顶部高光 -->
+            <Border CornerRadius="15" IsHitTestVisible="False" Height="26"
+                    VerticalAlignment="Top">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#1FFFFFFF" Offset="0"/>
+                        <GradientStop Color="#00FFFFFF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <!-- 简笔画鲸鱼：椭圆身 + 三角尾 + 挖空眼睛 -->
+            <Path IsHitTestVisible="False" Fill="#FF4D6BFE" Stretch="Uniform"
+                  Width="26" Height="26"
+                  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Path.Data>
+                    <GeometryGroup FillRule="EvenOdd">
+                        <EllipseGeometry Center="12,15" RadiusX="10" RadiusY="7.5"/>
+                        <PathGeometry Figures="M 22,15 L 30,9 L 30,21 Z"/>
+                        <EllipseGeometry Center="7.2,12.8" RadiusX="1.6" RadiusY="1.6"/>
+                    </GeometryGroup>
+                </Path.Data>
+            </Path>
+        </Grid>
+    </Grid>
+</Window>

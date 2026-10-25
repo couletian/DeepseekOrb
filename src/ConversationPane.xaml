@@ -1,0 +1,65 @@
+<UserControl x:Class="DeepSeekOrb.ConversationPane"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+             Background="{DynamicResource PageBg}"
+             MinWidth="240" MinHeight="140">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 标题条：识别序号 + 关闭 -->
+        <Border x:Name="TitleBar" Grid.Row="0"
+                Background="#C81B1D21"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <Border Width="7" Height="7" CornerRadius="2"
+                            Background="{DynamicResource Accent}" Margin="0,0,7,0"/>
+                    <TextBlock x:Name="IndexText" Text="对话 1"
+                               FontSize="11" Foreground="{DynamicResource TextPrimary}"/>
+                </StackPanel>
+
+                <Button x:Name="CloseButton" Content="&#xE8BB;" Grid.Column="1"
+                        Width="22" Height="22" Click="CloseButton_Click"
+                        Background="Transparent" BorderThickness="0" Padding="0"
+                        FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="10"
+                        Foreground="{DynamicResource TextSecondary}" Cursor="Hand"/>
+            </Grid>
+        </Border>
+
+        <!-- 内容区 -->
+        <Grid Grid.Row="1">
+            <wv2:WebView2 x:Name="Web"/>
+
+            <StackPanel x:Name="Splash" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Margin="12,0">
+                <Border Width="28" Height="28" CornerRadius="8"
+                        Background="{DynamicResource Accent}" Opacity="0.9"
+                        HorizontalAlignment="Center">
+                    <Path Fill="White" Stretch="Uniform" Margin="5">
+                        <Path.Data>
+                            <GeometryGroup FillRule="EvenOdd">
+                                <EllipseGeometry Center="12,15" RadiusX="10" RadiusY="7.5"/>
+                                <PathGeometry Figures="M 22,15 L 30,9 L 30,21 Z"/>
+                                <EllipseGeometry Center="7.2,12.8" RadiusX="1.6" RadiusY="1.6"/>
+                            </GeometryGroup>
+                        </Path.Data>
+                    </Path>
+                </Border>
+                <TextBlock x:Name="SplashText" Text="正在连接 DeepSeek…"
+                           Margin="0,10,0,0" HorizontalAlignment="Center"
+                           TextAlignment="Center" TextWrapping="Wrap"
+                           FontSize="11.5" Foreground="{DynamicResource TextSecondary}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

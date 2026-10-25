@@ -159,6 +159,25 @@ src/
 4. 需要系统已装 .NET 8 Desktop Runtime 与 WebView2 Runtime。
 
 ---
+## 界面演示
+![Uploading 屏幕截图 2026-10-25 214950.png…]()
+![Uploading 屏幕截图 2026-10-25 214955.png…]()
+![Uploading 屏幕截图 2026-10-25 215006.png…]()
+![Uploading 屏幕截图 2026-10-25 215021.png…]()
+<img width="980" height="1110" alt="屏幕截图 2026-10-25 215031" src="https://github.com/user-attachments/assets/8514c08b-b413-46ba-b39e-9367ee1a4c48" />
+
+---
+
+## 已知限制
+
+1. 磨砂背景是展开瞬间的静态快照，背后窗口内容变化时不会实时刷新；
+   收起后再展开即更新。
+2. 面板只支持纵向堆叠（单列多行），不支持左右分栏。
+3. 单实例运行，多开对话请用标题栏的「＋」按钮。
+4. 需要系统已装 .NET 8 Desktop Runtime 与 WebView2 Runtime。
+
+---
+
 
 ## 许可
 

@@ -1,4 +1,4 @@
-<img width="1016" height="1142" alt="屏幕截图 2026-10-25 215021" src="https://github.com/user-attachments/assets/96f507f6-573e-4635-b24c-6dadeb1da542" /># DeepSeek 桌面悬浮窗（DeepSeek Orb）
+# DeepSeek 桌面悬浮窗（DeepSeek Orb）
 
 一个轻量级的 Windows 桌面浮窗，把 DeepSeek 网页版常驻在屏幕右下角，
 鼠标一移上去就展开，用完自动收回，不占用任务栏位置。
@@ -160,12 +160,15 @@ src/
 
 ---
 ## 界面演示
-<img width="2558" height="1438" alt="屏幕截图 2026-10-25 214950" src="https://github.com/user-attachments/assets/1547caea-7b38-4200-9182-b0e743309176" />
-<img width="2558" height="1438" alt="屏幕截图 2026-10-25 214955" src="https://github.com/user-attachments/assets/cfbca189-c4bd-455f-9a03-032596a0b273" />
-<img width="611" height="1150" alt="屏幕截图 2026-10-25 215006" src="https://github.com/user-attachments/assets/4ee9ae18-5fc6-4169-bb8e-f9fccb1133dc" />
-<img width="1016" height="1142" alt="屏幕截图 2026-10-25 215021" src="https://github.com/user-attachments/assets/e2f7ab55-4847-42c6-9532-288044667149" />
-<img width="611" height="1150" alt="屏幕截图 2026-10-25 215006" src="https://github.com/user-attachments/assets/c9039c18-229e-430d-98fa-7e4bd2b7bdb9" />
-<img width="980" height="1110" alt="屏幕截图 2026-10-25 215031" src="https://github.com/user-attachments/assets/5870e696-0165-4098-b10f-346e067dcdbc" />![Uploading 屏幕截图 2026-10-25 214955.png…]()
+<img width="2558" height="1438" alt="屏幕截图 2026-10-25 214950" src="https://github.com/user-attachments/assets/a12bb76d-216d-448a-af4d-fa75091f8e8f" />
+<img width="2558" height="1438" alt="屏幕截图 2026-10-25 214955" src="https://github.com/user-attachments/assets/e1c142ab-2fcc-4934-b787-d77f7c42560c" />
+<img width="611" height="1150" alt="屏幕截图 2026-10-25 215006" src="https://github.com/user-attachments/assets/033e9103-58b6-4b92-9054-fc70df10a313" />
+<img width="1016" height="1142" alt="屏幕截图 2026-10-25 215021" src="https://github.com/user-attachments/assets/85170199-dd57-4dad-ba64-377b1f1cfc81" />
+<img width="980" height="1110" alt="屏幕截图 2026-10-25 215031" src="https://github.com/user-attachments/assets/6599bb82-741b-4a03-b9ae-927316d26366" />
+
+
+
+
 
 ---
 

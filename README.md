@@ -62,7 +62,17 @@
 | － | 移除最后一个面板 |
 | 📌 | 固定窗口（不自动收起） |
 | ⌄ | 收起成方块 |
-| ✕ | 退出程序 |
+| ✕ | 最小化到系统托盘（不退出程序） |
+
+**系统托盘**
+
+点 ✕ 后程序缩到系统托盘而不是退出：
+
+- **双击**托盘图标：唤回悬浮球，回到平时的悬停待命状态
+- **右键**托盘图标：打开悬浮窗 / 彻底退出程序
+
+Windows 11 首次会把新托盘图标折叠进「隐藏图标」面板（任务栏的 `^` 按钮）。
+找到 DeepSeek 图标后，用鼠标拖到任务栏上固定，以后就直接可见。
 
 ---
 
@@ -155,33 +165,11 @@ src/
 1. 磨砂背景是展开瞬间的静态快照，背后窗口内容变化时不会实时刷新；
    收起后再展开即更新。
 2. 面板只支持纵向堆叠（单列多行），不支持左右分栏。
-3. 单实例运行，多开对话请用标题栏的「＋」按钮。
+3. 单实例运行：重复双击不会开第二个进程，而是把已有实例唤回前台。
+   多开对话请用标题栏的「＋」按钮。
 4. 需要系统已装 .NET 8 Desktop Runtime 与 WebView2 Runtime。
 
 ---
-## 界面演示
-<img width="2558" height="1438" alt="屏幕截图 2026-10-25 214950" src="https://github.com/user-attachments/assets/a12bb76d-216d-448a-af4d-fa75091f8e8f" />
-<img width="2558" height="1438" alt="屏幕截图 2026-10-25 214955" src="https://github.com/user-attachments/assets/e1c142ab-2fcc-4934-b787-d77f7c42560c" />
-<img width="611" height="1150" alt="屏幕截图 2026-10-25 215006" src="https://github.com/user-attachments/assets/033e9103-58b6-4b92-9054-fc70df10a313" />
-<img width="1016" height="1142" alt="屏幕截图 2026-10-25 215021" src="https://github.com/user-attachments/assets/85170199-dd57-4dad-ba64-377b1f1cfc81" />
-<img width="980" height="1110" alt="屏幕截图 2026-10-25 215031" src="https://github.com/user-attachments/assets/6599bb82-741b-4a03-b9ae-927316d26366" />
-
-
-
-
-
----
-
-## 已知限制
-
-1. 磨砂背景是展开瞬间的静态快照，背后窗口内容变化时不会实时刷新；
-   收起后再展开即更新。
-2. 面板只支持纵向堆叠（单列多行），不支持左右分栏。
-3. 单实例运行，多开对话请用标题栏的「＋」按钮。
-4. 需要系统已装 .NET 8 Desktop Runtime 与 WebView2 Runtime。
-
----
-
 
 ## 许可
 

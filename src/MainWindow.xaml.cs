@@ -25,6 +25,7 @@ namespace DeepSeekOrb
         private ConversationPane _activePane;
         private bool _expanded;
         private bool _pinned;
+        private bool _shuttingDown;
         private DateTime? _outsideSince;
 
         internal bool IsExpanded => _expanded;
@@ -75,6 +76,14 @@ namespace DeepSeekOrb
             foreach (ConversationPane pane in _panes) pane.Dispose();
 
             base.OnClosed(e);
+
+            // 主窗口是程序宿主：不论用 ✕ 还是 Alt+F4 关闭，都应结束进程，
+            // 否则悬浮球仍处于隐藏态，会留下一个没有任何窗口的僵尸进程。
+            if (!_shuttingDown)
+            {
+                _shuttingDown = true;
+                Application.Current?.Shutdown();
+            }
         }
 
         // ───────────────────────── 生命周期 ─────────────────────────
@@ -505,6 +514,31 @@ namespace DeepSeekOrb
 
         private void BtnCollapse_Click(object sender, RoutedEventArgs e) => Collapse();
 
-        private void BtnClose_Click(object sender, RoutedEventArgs e) => Close();
+        private void BtnClose_Click(object sender, RoutedEventArgs e) => MinimizeToTray();
+
+        /// <summary>
+        /// 缩到系统托盘。窗口用「移出虚拟桌面」而不是 Hide()，
+        /// 否则 WebView2 合成器被销毁，再次唤回要等 1.5–2.5 秒才出画面。
+        /// </summary>
+        internal void MinimizeToTray()
+        {
+            _expanded = false;
+            _outsideSince = null;
+            _hoverWatch.Stop();
+
+            ParkOffscreen();
+            App.Orb.Hide();
+
+            if (App.Tray != null) App.Tray.Visible = true;
+        }
+
+        /// <summary>从托盘唤回：恢复悬浮球，回到平时悬停待命的状态。</summary>
+        internal void RestoreFromTray()
+        {
+            if (App.Tray != null) App.Tray.Visible = false;
+
+            App.Orb.ShowOrb();
+            App.Orb.Activate();
+        }
     }
 }

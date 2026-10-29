@@ -8,16 +8,24 @@ namespace DeepSeekOrb
 {
     public partial class App : Application
     {
+        private const string MutexName = @"Local\DeepSeekOrb.SingleInstance";
+        private const string ActivateEventName = @"Local\DeepSeekOrb.Activate";
+
         private static Mutex _mutex;
+        private static EventWaitHandle _activateSignal;
+        private static RegisteredWaitHandle _activateWait;
 
         internal static MainWindow Shell { get; private set; }
         internal static OrbWindow Orb { get; private set; }
+        internal static TrayIcon Tray { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            _mutex = new Mutex(true, @"Local\DeepSeekOrb.SingleInstance", out bool isNew);
+            _mutex = new Mutex(true, MutexName, out bool isNew);
             if (!isNew)
             {
+                // 已有实例：把它唤出来，而不是静默退出让用户以为程序坏了
+                WakeExistingInstance();
                 Shutdown();
                 return;
             }
@@ -26,15 +34,61 @@ namespace DeepSeekOrb
 
             base.OnStartup(e);
 
+            // 监听"又被双击了一次"的唤醒请求
+            _activateSignal = new EventWaitHandle(false, EventResetMode.AutoReset, ActivateEventName);
+            _activateWait = ThreadPool.RegisterWaitForSingleObject(
+                _activateSignal, OnActivateRequested, null, Timeout.Infinite, false);
+
             Shell = new MainWindow();
+
+            Tray = new TrayIcon();
+            Tray.OpenRequested += () => Shell?.RestoreFromTray();
+            Tray.ExitRequested += () => Shutdown();
+
             Orb = new OrbWindow();
 
             Orb.Show();
             Shell.BeginPrewarm();
         }
 
+        private static void WakeExistingInstance()
+        {
+            try
+            {
+                if (EventWaitHandle.TryOpenExisting(ActivateEventName, out EventWaitHandle handle))
+                {
+                    using (handle) handle.Set();
+                    Thread.Sleep(180);   // 给已有实例一点时间把球显示出来
+                }
+            }
+            catch
+            {
+                // 事件不存在说明对方是旧版本或已退出，只能静默结束
+            }
+        }
+
+        private void OnActivateRequested(object state, bool timedOut)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (Shell != null && Shell.IsExpanded)
+                {
+                    Shell.Activate();
+                    return;
+                }
+
+                Orb?.ShowOrb();
+                Orb?.Activate();
+            }));
+        }
+
         protected override void OnExit(ExitEventArgs e)
         {
+            _activateWait?.Unregister(null);
+            _activateSignal?.Dispose();
+
+            Tray?.Dispose();
+
             try { _mutex?.ReleaseMutex(); } catch { /* 未持有则忽略 */ }
             _mutex?.Dispose();
             base.OnExit(e);
